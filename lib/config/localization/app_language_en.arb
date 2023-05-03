@@ -1,0 +1,670 @@
+{
+    "language": "English (United States)",
+    "@language": {
+        "description": "The current language"
+    },
+    "onboarding1": "Where text meets the voice\nYou talk, we type",
+    "@onboarding1": {
+        "description": "Some few words for onboarding 1"
+    },
+    "onboarding2": "Accurate meeting minutes\npowered by AI",
+    "@onboarding2": {
+        "description": "Some few words for onboarding 2"
+    },
+    "onboarding3": "Turn voice to text in minutes\nEasy to use a text editor",
+    "@onboarding3": {
+        "description": "Some few words for onboarding 3"
+    },
+    "next": "Next",
+    "@next": {
+        "description": "A word for move to the next slide on onboarding screen"
+    },
+    "start": "Get Started",
+    "@start": {
+        "description": "A word for move to the next screen (sign or home screen)"
+    },
+    "name": "Name",
+    "@name": {
+        "description": "The name of user"
+    },
+    "errorName": "Enter min. 5 characters",
+    "@errorName": {
+        "description": "The name of user must be at least 5 characters"
+    },
+    "email": "Email",
+    "@email": {
+        "description": "The address of email"
+    },
+    "errorEmail": "Enter a valid email",
+    "@errorEmail": {
+        "description": "The email of user must be a valid"
+    },
+    "password": "Password",
+    "@password": {
+        "description": "A password for email"
+    },
+    "hintPassword": "Min. 8 characters",
+    "@hintPassword": {
+        "description": "Password must be at least 8 characters"
+    },
+    "errorPassword": "Enter min. 8 characters",
+    "@errorPassword": {
+        "description": "The password of user must be at least 8 characters"
+    },
+    "errorConfirmPassword": "Please check your password again",
+    "@errorConfirmPassword": {
+        "description": "The password and confirm password is not match"
+    },
+    "login": "Login",
+    "@login": {
+        "description": "An act of logging in to a system on login screen"
+    },
+    "sublogin": "Boost your productivity",
+    "@sublogin": {
+        "description": "Some few words under login"
+    },
+    "withGoogle": "{title} with Google",
+    "@withGoogle": {
+        "description": "An act with Google provider",
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "withMicrosoft": "{title} with Microsoft",
+    "@withMicrosoft": {
+        "description": "An act with Microsoft provider",
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "line": "or {title} with Email",
+    "@line": {
+        "description": "Some few words to suggest with email on line",
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "remember": "Remember Me",
+    "@remember": {
+        "description": "A system will save the email and password from user"
+    },
+    "forgot": "Forgot your password?",
+    "@forgot": {
+        "description": "If user forgot the password of the account"
+    },
+    "footerLogin1": "Not registered yet?",
+    "@footerLogin1": {
+        "description": "If user doesn't have account yet"
+    },
+    "footerLogin2": "Create an Account",
+    "@footerLogin2": {
+        "description": "Create account for user on signup screen"
+    },
+    "signup": "Sign Up",
+    "@signup": {
+        "description": "An act of sigging up in to a system on signup screen"
+    },
+    "subsignup": "Sign up to get free transcription minutes!",
+    "@subsignup": {
+        "description": "Some few words under signup"
+    },
+    "agreement": "I agree to the ",
+    "@agreement": {
+        "description": "The user must be agree with conditions"
+    },
+    "termConditions": "Terms & Conditions",
+    "@termConditions": {
+        "description": "Terms and conditions"
+    },
+    "footerSignup": "Already have an account?",
+    "@footerSignup": {
+        "description": "The question about user have an account or not"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "The word for navigation home"
+    },
+    "mine": "Mine",
+    "@mine": {
+        "description": "The word for navigation mine"
+    },
+    "upload": "Upload Audio",
+    "@upload": {
+        "description": "One of the micro menu for upload audio"
+    },
+    "record": "Record",
+    "@record": {
+        "description": "One of the micro menu for record"
+    },
+    "live": "Live Transcribe",
+    "@live": {
+        "description": "One of the micro menu for transcribe on online meeting"
+    },
+    "emptyFileRecord": "You haven't made any recording yet. Press the button below to get started.",
+    "@emptyFileRecord": {
+        "description": "Notes if file record is empty"
+    },
+    "myconversations": "My Conversations",
+    "@myconversations": {
+        "description": "The name of the first folder"
+    },
+    "folders": "Folders",
+    "@folders": {
+        "description": "The word for folders"
+    },
+    "selectFolder": "Select Folder",
+    "@selectFolder": {
+        "description": "The title to select folder"
+    },
+    "nameTitle": "Name {category}",
+    "@nameTitle": {
+        "description": "The title to create new file",
+        "placeholders": {
+            "category": {
+                "type": "String"
+            }
+        }
+    },
+    "hintTitle": "Enter your {category} name",
+    "@hintTitle": {
+        "description": "The hint to create new file",
+        "placeholders": {
+            "category": {
+                "type": "String"
+            }
+        }
+    },
+    "newFolder": "New Folder",
+    "@newFolder": {
+        "description": "The default name when creating new folder"
+    },
+    "search": "Search",
+    "@search": {
+        "description": "Hint text for search feature"
+    },
+    "searchKeywords": "Search for Keywords",
+    "@searchKeywords": {
+        "description": "About searching for some keywords"
+    },
+    "notesSearch": "Filter search results by spesific keyword by selecting every text from all records",
+    "@notesSearch": {
+        "description": "Notes about results of the searching"
+    },
+    "noResultSearch": "No Results",
+    "@noResultSearch": {
+        "description": "No results from the search"
+    },
+    "explanationNoResultSearch": "Sorry, there are no results for this search, please try another keyword!",
+    "@explanationNoResultSearch": {
+        "description": "Some explanation about no results on the search"
+    },
+    "importedFile": "Imported file",
+    "@importedFile": {
+        "description": "The type of file record is from imported file"
+    },
+    "recording": "Recording",
+    "@recording": {
+        "description": "The type of file record is from recording"
+    },
+    "meetings": "Meetings",
+    "@meetings": {
+        "description": "The type of file record is from live meeting"
+    },
+    "words": "{wordCount} words",
+    "@words": {
+        "description": "The number of words in one recording",
+        "placeholders": {
+            "wordCount": {
+                "type": "int"
+            }
+        }
+    },
+    "speed": "Speed",
+    "@speed": {
+        "description": "The speed of audio recorder"
+    },
+    "backward": "Backward",
+    "@backward": {
+        "description": "One of the feature on audio recorder to backward the audio 5 seconds"
+    },
+    "forward": "Forward",
+    "@forward": {
+        "description": "One of the feature on audio recorder to forward the audio 5 seconds"
+    },
+    "bookmarks": "Bookmarks",
+    "@bookmarks": {
+        "description": "One of the feature on audio recorder to mark timestamps on audio"
+    },
+    "copy": "Copy",
+    "@copy": {
+        "description": "One of the feature on list text to copy the text"
+    },
+    "edit": "Edit",
+    "@edit": {
+        "description": "One of the feature on list text to edit the text"
+    },
+    "addImages": "Add Images",
+    "@addImages": {
+        "description": "One of the feature on list text to add images on the text"
+    },
+    "mark": "Mark",
+    "@mark": {
+        "description": "One of the feature on list text to mark the timestamps"
+    },
+    "delete": "Delete",
+    "@delete": {
+        "description": "One of the feature to delete file"
+    },
+    "export": "Export",
+    "@export": {
+        "description": "One of the feature to export file"
+    },
+    "translate": "Translate",
+    "@translate": {
+        "description": "One of the feature to translate text"
+    },
+    "startRecord": "Start Record",
+    "@startRecord": {
+        "description": "Title recording can start"
+    },
+    "recordingRecord": "Recording . . .",
+    "@recordingRecord": {
+        "description": "Title recording"
+    },
+    "pauseRecord": "Pause Record",
+    "@pauseRecord": {
+        "description": "Title recording paused"
+    },
+    "explanationForRecord": "For a high-quality transcript, please speak clearly and slowly!",
+    "@explanationForRecord": {
+        "description": "The explanation for recording"
+    },
+    "startSpeaking": "Start speaking . . .",
+    "@startSpeaking": {
+        "description": "Hint text to start speaking"
+    },
+    "newRecord": "New record",
+    "@newRecord": {
+        "description": "The default title when create new record"
+    },
+    "join": "Join Tulisno for {usagePeriode} days",
+    "@join": {
+        "description": "One of the feature on list text to copy the text",
+        "placeholders": {
+            "usagePeriode": {
+                "type": "int"
+            }
+        } 
+    },
+    "accountInfo": "Account Info",
+    "@accountInfo": {
+        "description": "The title of the account info screen"
+    },
+    "username": "Username",
+    "@username": {
+        "description": "The username from account"
+    },
+    "editUsername": "Edit username",
+    "@editUsername": {
+        "description": "Edit the username of the account"
+    },
+    "emailAddress": "Email address",
+    "@emailAddress": {
+        "description": "The email address of the user"
+    },
+    "currentStatus": "Current status",
+    "@currentStatus": {
+        "description": "What status does the user hold currently?"
+    },
+    "knowMore": "Need to know more? Go to ",
+    "@knowMore": {
+        "description": "If user want to know more about it"
+    },
+    "miniBindingCode": "Mini Binding Code",
+    "@miniBindingCode": {
+        "description": "It is a code to bind the other user"
+    },
+    "enterCode": "Enter the 8-digit code",
+    "@enterCode": {
+        "description": "User must enter the code at least 8 digit"
+    },
+    "bindNow": "Binding Now",
+    "@bindNow": {
+        "description": "for button with text 'binding now'"
+    },
+    "transciptionLanguage": "Transcription Language",
+    "@transciptionLanguage": {
+        "description": "The current transcription language used"
+    },
+    "all": "All",
+    "@all": {
+        "description": "All available transciption languages"
+    },
+    "appLanguage": "App Language",
+    "@appLanguage": {
+        "description": "The current app language used"
+    },
+    "fontSize": "Font Size",
+    "@fontSize": {
+        "description": "The current font size used"
+    },
+    "sampleText": "The text will look like this 🙂",
+    "@sampleText": {
+        "description": "The sample text when user want to change font size"
+    },
+    "notesText": "The change in font size will only apply to transcription and translation text",
+    "@notesText": {
+        "description": "Notes on using the font size"
+    },
+    "minimum": "Min",
+    "@minimum": {
+        "description": "The minimum of the font size"
+    },
+    "maximum": "Max",
+    "@maximum": {
+        "description": "The maximum of the font size"
+    },
+    "tutorials": "Tutorials",
+    "@tutorials": {
+        "description": "Tutorials on how to use the app"
+    },
+    "realtime": "Real-time transcription",
+    "@realtime": {
+        "description": "One of the tutorials focuses on real-time transcription"
+    },
+    "audioMarkers": "Audio Markers",
+    "@audioMarkers": {
+        "description": "One of the tutorials focuses on audio markers"
+    },
+    "textBlocks": "Text in blocks",
+    "@textBlocks": {
+        "description": "One of the tutorials focuses on text in blocks"
+    },
+    "manageBookmarks": "Manage your bookmarks",
+    "@manageBookmarks": {
+        "description": "One of the tutorials focuses on managing user's bookmarks"
+    },
+    "helpCenter": "Help Center",
+    "@helpCenter": {
+        "description": "Helper if user finds something confused"
+    },
+    "sendFeedback": "Send Feedback",
+    "@sendFeedback": {
+        "description": "Users can send a feedback about the application"
+    },
+    "referEarn": "Refer & Earn",
+    "@referEarn": {
+        "description": "About refer & earn"
+    },
+    "userSurvey": "User survey",
+    "@userSurvey": {
+        "description": "About user survey"
+    },
+    "recommendFriends": "Recommend to friends",
+    "@recommendFriends": {
+        "description": "About recommend to friends"
+    },
+    "rateReview": "Rate & Review",
+    "@rateReview": {
+        "description": "About rate & review"
+    },
+    "web": "Tulisno Web (www.tulisno.com)",
+    "@web": {
+        "description": "About Tulibot Web"
+    },
+    "twitter": "Twitter",
+    "@twitter": {
+        "description": "About Tulisno's twitter"
+    },
+    "termsService": "Terms of Service",
+    "@termsService": {
+        "description": "About terms of service"
+    },
+    "privacyPolicy": "Privacy Policy",
+    "@privacyPolicy": {
+        "description": "About privacy policy"
+    },
+    "accountSecurity": "Account Security",
+    "@accountSecurity": {
+        "description": "About account security"
+    },
+    "deleteAccount": "Delete account",
+    "@deleteAccount": {
+        "description": "Delete account user"
+    },
+    "logout": "Log out",
+    "@logout": {
+        "description": "Log out account user"
+    },
+    "contactSupport": "Contact us at support@tulisno.com",
+    "@contactSupport": {
+        "description": "Contact support from web service"
+    },
+    "version": "Version: {version}",
+    "@version": {
+        "description": "The version of the application",
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Cancel the action"
+    },
+    "done": "Done",
+    "@done": {
+        "description": "Done the action"
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Save the action"
+    },
+    "underDevelop": "We are sorry. This feature is still under development.",
+    "@underDevelop": {
+        "description": "Notification for the feature is under development"
+    },
+    "usernameSaved": "New username saved",
+    "@usernameSaved": {
+        "description": "Notification for rename username if success"
+    },
+    "copiedClipboard": "Copied to clipboard",
+    "@copiedClipboard": {
+        "description": "Notification for copy text"
+    },
+    "fileDeleted": "File deleted",
+    "@fileDeleted": {
+        "description": "Notification for delete file"
+    },
+    "titleVerify": "Verify your email address",
+    "@titleVerify": {
+        "description": "The title for email verification alert"
+    },
+    "contentVerify": "Please confirm the account by clicking the button on the email we have sent.",
+    "@contentVerify": {
+        "description": "The content for email verification alert"
+    },
+    "titleForgot": "Forgot Password",
+    "@titleForgot": {
+        "description": "The title for forgot password"
+    },
+    "contentForgot": "Enter your email for the verification process. We will send a link to your email.",
+    "@contentForgot": {
+        "description": "The content for forgot password"
+    },
+    "send": "Send",
+    "@send": {
+        "description": "Send email"
+    },
+    "titleReset": "Reset Password",
+    "@titleReset": {
+        "description": "The title for reset password"
+    },
+    "contentReset": "Set the new password for your account so you can log in and access all the features.",
+    "@contentReset": {
+        "description": "The content for reset password"
+    },
+    "confirmPassword": "Confirm Password",
+    "@confirmPassword": {
+        "description": "Confirm password by re-enter password"
+    },
+    "minLeft": "{number} mins left",
+    "@minLeft": {
+        "description": "The number of minute quota",
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "minTotal": "{number} mins in total",
+    "@minTotal": {
+        "description": "The number of minute total quota",
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    },
+    "transcripMinute": "Transcription minutes",
+    "@transcripMinute": {
+        "description": "Text constant of transcription minutes"
+    },
+    "resetSuccess": "Password reset successfully!",
+    "@resetSuccess": {
+        "description": "Notification if password reset successfully"
+    },
+    "resetFailed": "Password reset failed!",
+    "@resetFailed": {
+        "description": "Notification if password reset failed"
+    },
+    "loginFailed1": "Login failed.\nPlease make sure your email or password is correct.",
+    "@loginFailed1": {
+        "description": "Notification if login failed because email or password is incorrect"
+    },
+    "loginFailed2": "Login failed.\nYour account hasn't been verified.",
+    "@loginFailed2": {
+        "description": "Notification if login failed because the account hasn't been verified"
+    },
+    "noteLogout": "Do you want to log out?",
+    "@noteLogout": {
+        "description": "Note for logout"
+    },
+    "warningDeleteAccount": "Do you want to delete this account?",
+    "@warningDeleteAccount": {
+        "description": "Warning for delete account"
+    },
+    "titleNoInternet": "No Internet Connection",
+    "@titleNoInternet": {
+        "description": "Title for alert of no internet connection"
+    },
+    "contentNoInternet": "Make sure the device is connected to the internet in order to use this feature.",
+    "@contentNoInternet": {
+        "description": "Content for alert of no internet connection"
+    },
+    "progressTranscript": "Transcription is progressing . . .",
+    "@progressTranscript": {
+        "description": "Progress some transcribe"
+    },
+    "noteFontSize": "Resize setting is available for transcription and translation text only.",
+    "@noteFontSize": {
+        "description": "Notes for setting font size"
+    },
+    "getMoreQuota": "Get more quota minutes",
+    "@getMoreQuota": {
+        "description": "Notes for getting quota"
+    },
+    "subscribe": "Subcribe",
+    "@subscribe": {
+        "description": "Text for subscribe"
+    },
+    "member": "Member",
+    "@member": {
+        "description": "Text for member"
+    },
+    "changeMember": "Change member",
+    "@changeMember": {
+        "description": "Text for change member"
+    },
+    "fromMember": "From member : {member}",
+    "@fromMember": {
+        "description": "Text for from member",
+        "placeholders": {
+            "member": {
+                "type": "String"
+            }
+        }
+    },
+    "toMember": "to member : ",
+    "@toMember": {
+        "description": "Text for to member"
+    },
+    "uploadPhotoProof": "Tap here to upload a proof of payment photo",
+    "@uploadPhotoProof": {
+        "description": "Notes for upload a photo of proof of payment"
+    },
+    "deleteFolder": "Delete Folder",
+    "@deleteFolder": {
+        "description": "Title for delete folder"
+    },
+    "contentDeleteFolder": "All files in this folder will be deleted.\nAre you sure to delete this folder?",
+    "@contentDeleteFolder": {
+        "description": "Content for delete folder"
+    },
+    "yes": "Yes",
+    "@yes": {
+        "description": "Text for yes word"
+    },
+    "no": "No",
+    "@contentDeleteFolder": {
+        "description": "Text for no word"
+    },
+    "noteUploadAudio": "This feature only supports WAV, FLAC, and OPUS audio with a maximum file size of 10MB. Therefore, if the file you want to upload is more than that, it is recommended to reduce the size of the audio file.",
+    "@noteUploadAudio": {
+        "description": "Note for notif upload file"
+    },
+    "warningUploadProofPayment": "Please upload a proof of payment photo!",
+    "@warningUploadProofPayment": {
+        "description": "Warning if user forgot uploading the payment proof"
+    },
+    "warningUploadAudio": "Upload failed!\nMake sure the audio file has the appropriate format.",
+    "@warningUploadAudio": {
+        "description": "Warning if user uploads the wrong audio file"
+    },
+    "addQuota": "Addition of quota minutes",
+    "@addQuota": {
+        "description": "Text for adding quota minutes"
+    },
+    "minutes": "{minute} minutes",
+    "@minutes": {
+        "description": "Text for minutes",
+        "placeholders": {
+            "minute": {
+                "type": "int"
+            }
+        }
+    },
+    "price": "Price",
+    "@price": {
+        "description": "Text for price"
+    },
+    "transfer": "Transfer to the Destination Account :",
+    "@transfer": {
+        "description": "Text for destination account"
+    },
+    "titleOrder": "Complete your order",
+    "@titleOrder": {
+        "description": "Title for payment order"
+    },
+    "contentOrder": "Your order has been sent through your email. Please complete the order before the time ends.",
+    "@contentOrder": {
+        "description": "Content for payment order"
+    }
+}
