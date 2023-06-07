@@ -40,10 +40,11 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Tulibot',
             theme: ThemeData(
-              scaffoldBackgroundColor: kPrimaryLightColor,
+              // scaffoldBackgroundColor: kPrimaryLightColor,
               appBarTheme: const AppBarTheme(
-                  backgroundColor: kPrimaryLightColor,
+                  backgroundColor: kColor1,
                   elevation: 0,
+                  titleTextStyle: TextStyle(color: Colors.black),
                   iconTheme: IconThemeData(color: Colors.black)),
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
