@@ -13,10 +13,10 @@ packages:
     dependency: "direct main"
     description:
       name: appwrite
-      sha256: "76da9975c5953d4d2b84bd68fe1cc90349a9cec43af16583f23d0df6a05ab8cf"
+      sha256: "33b3bd5fe4d8a7271ad4f4e0991cf4d08f2d719f47a3767d71d0295479a096bc"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.0"
+    version: "8.3.0"
   archive:
     dependency: transitive
     description:
@@ -382,7 +382,7 @@ packages:
     source: hosted
     version: "1.8.2"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"

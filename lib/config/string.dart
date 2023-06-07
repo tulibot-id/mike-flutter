@@ -2,7 +2,7 @@ part of config;
 
 // Connection to Appwrite
 const String endPoint = 'https://api.tulisno.com/v1';
-const String projectID = '62664d9b44156620833d';
+const String projectID = '642d7e31a2233791671f';
 const String endPointVerify = 'https://api.tulisno.com/verify-email';
 const String endPointReset = 'https://api.tulisno.com/forgot-password';
 const String endPointPayment = 'https://api.tulisno.com/create_invoice';
