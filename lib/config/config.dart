@@ -2,6 +2,7 @@ library config;
 
 import 'package:flutter/material.dart';
 import 'package:tulibot/screens/initial/initial_screen.dart';
+import 'package:tulibot/screens/home/home_screen.dart';
 // import 'package:tulibot/screens/mine/account_info/account_info.dart';
 // import 'package:tulibot/screens/mine/account_security/account_security_screen.dart';
 // import 'package:tulibot/screens/mine/font_size/font_size_screen.dart';

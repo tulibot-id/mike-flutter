@@ -38,7 +38,8 @@ class UserAuth {
     try {
       await account.createEmailSession(email: email, password: password);
       return true;
-    } on AppwriteException catch (_) {
+    } on AppwriteException catch (e) {
+      print('loginError: ${e.message}');
       return false;
     }
   }

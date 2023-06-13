@@ -30,6 +30,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: LocaleService()),
+        ChangeNotifierProvider.value(value: UserService.instance),
+        ChangeNotifierProvider.value(value: SliderService()),
+        ChangeNotifierProvider.value(value: PageService()),
+        ChangeNotifierProvider.value(value: LoginService()),
+        ChangeNotifierProvider.value(value: SignupService()),
+        ChangeNotifierProvider.value(value: ResetPasswordService()),
       ],
       child: Selector<LocaleService, Locale?>(
         selector: (_, get) => get.locale,

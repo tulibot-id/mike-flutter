@@ -15,6 +15,7 @@ import './send_config.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+  static String routeName = '/home_screen';
 
   @override
   State<HomeScreen> createState() => _HomeScreen();

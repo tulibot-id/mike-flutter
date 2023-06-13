@@ -2,6 +2,7 @@ part of config;
 
 final Map<String, WidgetBuilder> routes = {
   InitialScreen.routeName: (context) => const InitialScreen(),
+  HomeScreen.routeName: (context) => const HomeScreen(),
   // OnboardingScreen.routeName: (context) => const OnboardingScreen(),
   // SignScreen.routeName: (context) => const SignScreen(),
   // AccountSecurityScreen.routeName: (context) => const AccountSecurityScreen(),
