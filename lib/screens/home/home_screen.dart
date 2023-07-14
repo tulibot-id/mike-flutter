@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:tulibot/models/models.dart';
+import 'package:tulibot/screens/widgets/webview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import './ChatPage.dart';
@@ -47,6 +48,7 @@ class _HomeScreen extends State<HomeScreen> {
   String _name = "...";
   String _wifiSSID = "...";
   String _wifiPassword = "...";
+  String _webURL = "";
   String _roomName = "...";
   String _languageCode = "...";
 
@@ -537,6 +539,53 @@ class _HomeScreen extends State<HomeScreen> {
                     // } else {
                     //   print('Discovery -> no device selected');
                     // }
+                  }),
+            ),
+            Divider(),
+            ListTile(
+              title: TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter URL',
+                ),
+                onChanged: (String? value) {
+                  if (value != null && value.isNotEmpty) {
+                    setState(() {
+                      _webURL = value;
+                    });
+                  }
+                },
+              ),
+            ),
+            ListTile(
+              title: ElevatedButton(
+                  child: const Text('Open Webview'),
+                  onPressed: () async {
+                    //check if webURL is not empty
+                    if (_webURL.isNotEmpty) {
+                      //open webview
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return WebViewContainer(_webURL);
+                          },
+                        ),
+                      );
+                    } else {
+                      //show toast
+                      Fluttertoast.showToast(
+                        msg: "Please enter a URL",
+                        toastLength: Toast.LENGTH_SHORT,
+                      );
+                    }
+                    // await Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return WebViewContainer(
+                    //           "https://8d8b70a3-8fe2-4f19-918c-96f299597843.mock.pstmn.io/login");
+                    //     },
+                    //   ),
+                    // );
                   }),
             ),
             Divider(),
