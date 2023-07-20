@@ -87,7 +87,6 @@ flutter:
   assets:
     - assets/images/
     - assets/logos/
-    - assets/tulisno-0b5682a20cb2.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

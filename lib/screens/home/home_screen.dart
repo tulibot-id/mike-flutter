@@ -20,15 +20,15 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreen();
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //       appBar: AppBar(
-  //         backgroundColor: Colors.white,
-  //         automaticallyImplyLeading: false,
-  //         actions: const [TitleFolder(), Spacer(), SearchBarButton()],
-  //       ),
-  //       body: const ListRecord());
-  // }
+// Widget build(BuildContext context) {
+//   return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Colors.white,
+//         automaticallyImplyLeading: false,
+//         actions: const [TitleFolder(), Spacer(), SearchBarButton()],
+//       ),
+//       body: const ListRecord());
+// }
 }
 
 class _HomeScreen extends State<HomeScreen> {
@@ -37,9 +37,11 @@ class _HomeScreen extends State<HomeScreen> {
   //Send config stuff
   BluetoothConnection? connection;
   bool isConnecting = true;
+
   bool get isConnected => (connection?.isConnected ?? false);
 
   bool isDisconnecting = false;
+
   //End
 
   String _messageBuffer = '';
@@ -51,6 +53,10 @@ class _HomeScreen extends State<HomeScreen> {
   String _webURL = "";
   String _roomName = "...";
   String _languageCode = "...";
+  String _speakerAName = "...";
+  String _speakerBName = "...";
+  String _speakerCName = "...";
+  String _speakerDName = "...";
 
   Timer? _discoverableTimeoutTimer;
   int _discoverableTimeoutSecondsLeft = 0;
@@ -265,238 +271,9 @@ class _HomeScreen extends State<HomeScreen> {
                     }
                   }),
             ),
-            // ListTile(
-            //   title: ElevatedButton(
-            //     child: const Text('Connect to paired device to chat'),
-            //     onPressed: () async {
-            //       final BluetoothDevice? selectedDevice =
-            //           await Navigator.of(context).push(
-            //         MaterialPageRoute(
-            //           builder: (context) {
-            //             return SelectBondedDevicePage(checkAvailability: false);
-            //           },
-            //         ),
-            //       );
-
-            //       if (selectedDevice != null) {
-            //         print('Connect -> selected ' + selectedDevice.address);
-            //         _startChat(context, selectedDevice);
-            //       } else {
-            //         print('Connect -> no device selected');
-            //       }
-            //     },
-            //   ),
-            // ),
-            Divider(),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Enter WiFi SSID',
-                ),
-                onChanged: (String? value) {
-                  if (value != null && value.isNotEmpty) {
-                    setState(() {
-                      _wifiSSID = value;
-                    });
-                    // debugPrint('SSID value: "$value"');
-                  }
-                },
-              ),
-            ),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Enter WiFi Password',
-                ),
-                onChanged: (String? value) {
-                  if (value != null && value.isNotEmpty) {
-                    setState(() {
-                      _wifiPassword = value;
-                    });
-                    // debugPrint('Password value: "$value"');
-                  }
-                },
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                ElevatedButton(
-                    child: const Text('Connect & Save'),
-                    onPressed: () async {
-                      // {
-                      //   "command":["connect"],
-                      //   "ssid":"yourSSIDhere",
-                      //   "password":"yourAPpassword"
-                      // }
-                      //create JSON
-                      //if bluetooth connected isConnected
-                      if (isConnected) {
-                        final Map<String, dynamic> data = <String, dynamic>{
-                          'command': ['connect'],
-                          'ssid': _wifiSSID,
-                          'password': _wifiPassword,
-                        };
-                        //convert JSON to string
-                        final String text = json.encode(data);
-                        connection!.output.add(
-                            Uint8List.fromList(utf8.encode(text + "\r\n")));
-                        await connection!.output.allSent;
-                        //show toast
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Command sent: $text'),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
-                      } else {
-                        //show toast
-                        Fluttertoast.showToast(
-                          msg: "Bluetooth not connected",
-                          toastLength: Toast.LENGTH_SHORT,
-                        );
-                      }
-                    }),
-                ElevatedButton(
-                    child: const Text('Disconnect'),
-                    onPressed: () async {
-                      // {
-                      //   "command":["disconnect"]
-                      // }
-                      //create JSON
-                      if (isConnected) {
-                        final Map<String, dynamic> data = <String, dynamic>{
-                          'command': ['disconnect'],
-                        };
-                        //convert JSON to string
-                        final String text = json.encode(data);
-                        connection!.output.add(
-                            Uint8List.fromList(utf8.encode(text + "\r\n")));
-                        await connection!.output.allSent;
-                        //show toast
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Command sent: $text'),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
-                      } else {
-                        //show toast
-                        Fluttertoast.showToast(
-                          msg: "Bluetooth not connected",
-                          toastLength: Toast.LENGTH_SHORT,
-                        );
-                      }
-                    }),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                ElevatedButton(
-                    child: const Text('Auto-connect'),
-                    onPressed: () async {
-                      // {
-                      //   "command":["auto_connect"]
-                      // }
-                      //create JSON
-                      if (isConnected) {
-                        final Map<String, dynamic> data = <String, dynamic>{
-                          'command': ['auto_connect'],
-                        };
-                        //convert JSON to string
-                        final String text = json.encode(data);
-                        connection!.output.add(
-                            Uint8List.fromList(utf8.encode(text + "\r\n")));
-                        await connection!.output.allSent;
-                        //show toast
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Command sent: $text'),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
-                      } else {
-                        //show toast
-                        Fluttertoast.showToast(
-                          msg: "Bluetooth not connected",
-                          toastLength: Toast.LENGTH_SHORT,
-                        );
-                      }
-                    }),
-                ElevatedButton(
-                    child: const Text('Delete Config'),
-                    onPressed: () async {
-                      // {
-                      //   "command":["delete_connection"],
-                      //   "ssid":"yourSSIDhere"
-                      // }
-                      //create JSON
-                      if (isConnected) {
-                        final Map<String, dynamic> data = <String, dynamic>{
-                          'command': ['delete_connection'],
-                          'ssid': _wifiSSID,
-                        };
-                        //convert JSON to string
-                        final String text = json.encode(data);
-                        connection!.output.add(
-                            Uint8List.fromList(utf8.encode(text + "\r\n")));
-                        await connection!.output.allSent;
-                        //show toast
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Command sent: $text'),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
-                      } else {
-                        //show toast
-                        Fluttertoast.showToast(
-                          msg: "Bluetooth not connected",
-                          toastLength: Toast.LENGTH_SHORT,
-                        );
-                      }
-                    }),
-              ],
-            ),
-            // ListTile(
-            //   title: TextFormField(
-            //     decoration: const InputDecoration(
-            //       border: UnderlineInputBorder(),
-            //       labelText: 'Enter Room Name',
-            //     ),
-            //     onChanged: (String? value) {
-            //       if (value != null && value.isNotEmpty) {
-            //         setState(() {
-            //           _roomName = value;
-            //         });
-            //         // debugPrint('Room value: "$value"');
-            //       }
-            //     },
-            //   ),
-            // ),
-            // ListTile(
-            //   title: TextFormField(
-            //     decoration: const InputDecoration(
-            //       border: UnderlineInputBorder(),
-            //       labelText: 'Enter Language Code',
-            //     ),
-            //     onChanged: (String? value) {
-            //       if (value != null && value.isNotEmpty) {
-            //         setState(() {
-            //           _languageCode = value;
-            //         });
-            //         // debugPrint('Language value: "$value"');
-            //       }
-            //     },
-            //   ),
-            // ),
-            Divider(),
             ListTile(
               title: ElevatedButton(
-                  child: const Text('Connect to device'),
+                  child: const Text('Connect to Mike'),
                   onPressed: () async {
                     print("Wifi SSID: $_wifiSSID");
                     print("Wifi Password: $_wifiPassword");
@@ -539,6 +316,557 @@ class _HomeScreen extends State<HomeScreen> {
                     // } else {
                     //   print('Discovery -> no device selected');
                     // }
+                  }),
+            ),
+            // ListTile(
+            //   title: ElevatedButton(
+            //     child: const Text('Connect to paired device to chat'),
+            //     onPressed: () async {
+            //       final BluetoothDevice? selectedDevice =
+            //           await Navigator.of(context).push(
+            //         MaterialPageRoute(
+            //           builder: (context) {
+            //             return SelectBondedDevicePage(checkAvailability: false);
+            //           },
+            //         ),
+            //       );
+
+            //       if (selectedDevice != null) {
+            //         print('Connect -> selected ' + selectedDevice.address);
+            //         _startChat(context, selectedDevice);
+            //       } else {
+            //         print('Connect -> no device selected');
+            //       }proceed
+            //     },
+            //   ),
+            // ),
+            Divider(),
+            ListTile(
+              title: const Text('Mike Control & Configs'),
+            ),
+            ListTile(
+              title: TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter WiFi SSID',
+                ),
+                onChanged: (String? value) {
+                  if (value != null && value.isNotEmpty) {
+                    setState(() {
+                      _wifiSSID = value;
+                    });
+                    // debugPrint('SSID value: "$value"');
+                  }
+                },
+              ),
+            ),
+            ListTile(
+              title: TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter WiFi Password',
+                ),
+                onChanged: (String? value) {
+                  if (value != null && value.isNotEmpty) {
+                    setState(() {
+                      _wifiPassword = value;
+                    });
+                    // debugPrint('Password value: "$value"');
+                  }
+                },
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  width: 130,
+                  child: ElevatedButton(
+                      child: const Text('Connect'),
+                      onPressed: () async {
+                        // {
+                        //   "command":["connect"],
+                        //   "ssid":"yourSSIDhere",
+                        //   "password":"yourAPpassword"
+                        // }
+                        //create JSON
+                        //if bluetooth connected isConnected
+                        if (isConnected) {
+                          final Map<String, dynamic> data = <String, dynamic>{
+                            'command': ['connect'],
+                            'ssid': _wifiSSID,
+                            'password': _wifiPassword,
+                          };
+                          //convert JSON to string
+                          final String text = json.encode(data);
+                          connection!.output.add(
+                              Uint8List.fromList(utf8.encode(text + "\r\n")));
+                          await connection!.output.allSent;
+                          //show toast
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Command sent: $text'),
+                              duration: const Duration(seconds: 3),
+                            ),
+                          );
+                        } else {
+                          //show toast
+                          Fluttertoast.showToast(
+                            msg: "Bluetooth not connected",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                        }
+                      }),
+                ),
+                SizedBox(
+                  width: 130,
+                  child: ElevatedButton(
+                      child: const Text('Disconnect'),
+                      onPressed: () async {
+                        // {
+                        //   "command":["disconnect"]
+                        // }
+                        //create JSON
+                        if (isConnected) {
+                          final Map<String, dynamic> data = <String, dynamic>{
+                            'command': ['disconnect'],
+                          };
+                          //convert JSON to string
+                          final String text = json.encode(data);
+                          connection!.output.add(
+                              Uint8List.fromList(utf8.encode(text + "\r\n")));
+                          await connection!.output.allSent;
+                          //show toast
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Command sent: $text'),
+                              duration: const Duration(seconds: 3),
+                            ),
+                          );
+                        } else {
+                          //show toast
+                          Fluttertoast.showToast(
+                            msg: "Bluetooth not connected",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                        }
+                      }),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  width: 130,
+                  child: ElevatedButton(
+                      child: const Text('Auto-connect'),
+                      onPressed: () async {
+                        // {
+                        //   "command":["auto_connect"]
+                        // }
+                        //create JSON
+                        if (isConnected) {
+                          final Map<String, dynamic> data = <String, dynamic>{
+                            'command': ['auto_connect'],
+                          };
+                          //convert JSON to string
+                          final String text = json.encode(data);
+                          connection!.output.add(
+                              Uint8List.fromList(utf8.encode(text + "\r\n")));
+                          await connection!.output.allSent;
+                          //show toast
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Command sent: $text'),
+                              duration: const Duration(seconds: 3),
+                            ),
+                          );
+                        } else {
+                          //show toast
+                          Fluttertoast.showToast(
+                            msg: "Bluetooth not connected",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                        }
+                      }),
+                ),
+                SizedBox(
+                  width: 130,
+                  child: ElevatedButton(
+                      child: const Text('Delete Config'),
+                      onPressed: () async {
+                        // {
+                        //   "command":["delete_connection"],
+                        //   "ssid":"yourSSIDhere"
+                        // }
+                        //create JSON
+                        if (isConnected) {
+                          final Map<String, dynamic> data = <String, dynamic>{
+                            'command': ['delete_connection'],
+                            'ssid': _wifiSSID,
+                          };
+                          //convert JSON to string
+                          final String text = json.encode(data);
+                          connection!.output.add(
+                              Uint8List.fromList(utf8.encode(text + "\r\n")));
+                          await connection!.output.allSent;
+                          //show toast
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Command sent: $text'),
+                              duration: const Duration(seconds: 3),
+                            ),
+                          );
+                        } else {
+                          //show toast
+                          Fluttertoast.showToast(
+                            msg: "Bluetooth not connected",
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                        }
+                      }),
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  width: 150,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Room Name',
+                    ),
+                    onChanged: (String? value) {
+                      if (value != null && value.isNotEmpty) {
+                        setState(() {
+                          _roomName = value;
+                        });
+                        // debugPrint('Room value: "$value"');
+                      }
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Language Code',
+                    ),
+                    onChanged: (String? value) {
+                      if (value != null && value.isNotEmpty) {
+                        setState(() {
+                          _languageCode = value;
+                        });
+                        // debugPrint('Language value: "$value"');
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  width: 150,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Speaker 1 Name',
+                    ),
+                    onChanged: (String? value) {
+                      if (value != null && value.isNotEmpty) {
+                        setState(() {
+                          _speakerAName = value;
+                        });
+                      }
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Speaker 2 Name',
+                    ),
+                    onChanged: (String? value) {
+                      if (value != null && value.isNotEmpty) {
+                        setState(() {
+                          _speakerBName = value;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(
+                  width: 150,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Speaker 3 Name',
+                    ),
+                    onChanged: (String? value) {
+                      if (value != null && value.isNotEmpty) {
+                        setState(() {
+                          _speakerCName = value;
+                        });
+                      }
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Speaker 4 Name',
+                    ),
+                    onChanged: (String? value) {
+                      if (value != null && value.isNotEmpty) {
+                        setState(() {
+                          _speakerDName = value;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+
+            ListTile(
+              title: ElevatedButton(
+                  child: const Text('Apply Configurations'),
+                  onPressed: () async {
+                    // {
+                    //   "command":["connect"],
+                    //   "ssid":"yourSSIDhere",
+                    //   "password":"yourAPpassword"
+                    // }
+                    //create JSON
+                    //if bluetooth connected isConnected
+                    if (isConnected) {
+                      final Map<String, dynamic> data = <String, dynamic>{
+                        'command': ['mike_chatConfig_change'],
+                        'room': _roomName,
+                        'username': [
+                          _speakerAName,
+                          _speakerBName,
+                          _speakerCName,
+                          _speakerDName
+                        ],
+                        'langCode': _languageCode,
+                      };
+                      //convert JSON to string
+                      final String text = json.encode(data);
+                      connection!.output
+                          .add(Uint8List.fromList(utf8.encode(text + "\r\n")));
+                      await connection!.output.allSent;
+                      //show toast
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Command sent: $text'),
+                          duration: const Duration(seconds: 3),
+                        ),
+                      );
+                    } else {
+                      //show toast
+                      Fluttertoast.showToast(
+                        msg: "Bluetooth not connected",
+                        toastLength: Toast.LENGTH_SHORT,
+                      );
+                    }
+                  }),
+            ),
+
+            Row(
+
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(width:130,child:ElevatedButton(
+                    child: const Text('Start App'),
+                    onPressed: () async {
+                      // {
+                      //   "command":["connect"],
+                      //   "ssid":"yourSSIDhere",
+                      //   "password":"yourAPpassword"
+                      // }
+                      //create JSON
+                      //if bluetooth connected isConnected
+                      if (isConnected) {
+                        final Map<String, dynamic> data = <String, dynamic>{
+                          'command': ['mike_driver_start'],
+                        };
+                        //convert JSON to string
+                        final String text = json.encode(data);
+                        connection!.output
+                            .add(Uint8List.fromList(utf8.encode(text + "\r\n")));
+                        await connection!.output.allSent;
+                        //show toast
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Command sent: $text'),
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                      } else {
+                        //show toast
+                        Fluttertoast.showToast(
+                          msg: "Bluetooth not connected",
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      }
+                    }),),
+                SizedBox(width:130,child:ElevatedButton(
+                    child: const Text('Stop App'),
+                    onPressed: () async {
+                      // {
+                      //   "command":["connect"],
+                      //   "ssid":"yourSSIDhere",
+                      //   "password":"yourAPpassword"
+                      // }
+                      //create JSON
+                      //if bluetooth connected isConnected
+                      if (isConnected) {
+                        final Map<String, dynamic> data = <String, dynamic>{
+                          'command': ['mike_driver_stop'],
+                        };
+                        //convert JSON to string
+                        final String text = json.encode(data);
+                        connection!.output
+                            .add(Uint8List.fromList(utf8.encode(text + "\r\n")));
+                        await connection!.output.allSent;
+                        //show toast
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Command sent: $text'),
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                      } else {
+                        //show toast
+                        Fluttertoast.showToast(
+                          msg: "Bluetooth not connected",
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      }
+                    }),),
+              ],
+            ),
+
+            Row(
+
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                SizedBox(width:130,child:ElevatedButton(
+                    child: const Text('Start Caption'),
+                    onPressed: () async {
+                      // {
+                      //   "command":["connect"],
+                      //   "ssid":"yourSSIDhere",
+                      //   "password":"yourAPpassword"
+                      // }
+                      //create JSON
+                      //if bluetooth connected isConnected
+                      if (isConnected) {
+                        final Map<String, dynamic> data = <String, dynamic>{
+                          'command': ['mike_caption_start'],
+                        };
+                        //convert JSON to string
+                        final String text = json.encode(data);
+                        connection!.output
+                            .add(Uint8List.fromList(utf8.encode(text + "\r\n")));
+                        await connection!.output.allSent;
+                        //show toast
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Command sent: $text'),
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                      } else {
+                        //show toast
+                        Fluttertoast.showToast(
+                          msg: "Bluetooth not connected",
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      }
+                    }),),
+                SizedBox(width:130,child:ElevatedButton(
+                    child: const Text('Stop Caption'),
+                    onPressed: () async {
+                      // {
+                      //   "command":["connect"],
+                      //   "ssid":"yourSSIDhere",
+                      //   "password":"yourAPpassword"
+                      // }
+                      //create JSON
+                      //if bluetooth connected isConnected
+                      if (isConnected) {
+                        final Map<String, dynamic> data = <String, dynamic>{
+                          'command': ['mike_caption_stop'],
+                        };
+                        //convert JSON to string
+                        final String text = json.encode(data);
+                        connection!.output
+                            .add(Uint8List.fromList(utf8.encode(text + "\r\n")));
+                        await connection!.output.allSent;
+                        //show toast
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Command sent: $text'),
+                            duration: const Duration(seconds: 3),
+                          ),
+                        );
+                      } else {
+                        //show toast
+                        Fluttertoast.showToast(
+                          msg: "Bluetooth not connected",
+                          toastLength: Toast.LENGTH_SHORT,
+                        );
+                      }
+                    }),),
+              ],
+            ),
+
+            ListTile(
+              title: ElevatedButton(
+                  child: const Text('Rejoin Room'),
+                  onPressed: () async {
+
+                    if (isConnected) {
+                      final Map<String, dynamic> data = <String, dynamic>{
+                        'command': ['mike_rejoin_room'],
+                      };
+                      //convert JSON to string
+                      final String text = json.encode(data);
+                      connection!.output
+                          .add(Uint8List.fromList(utf8.encode(text + "\r\n")));
+                      await connection!.output.allSent;
+                      //show toast
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Command sent: $text'),
+                          duration: const Duration(seconds: 3),
+                        ),
+                      );
+                    } else {
+                      //show toast
+                      Fluttertoast.showToast(
+                        msg: "Bluetooth not connected",
+                        toastLength: Toast.LENGTH_SHORT,
+                      );
+                    }
                   }),
             ),
             Divider(),
