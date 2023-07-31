@@ -33,6 +33,7 @@ class UserAuth {
     return _avatars!;
   }
 
+
   Future<bool> login(String email, String password) async {
     final account = await instance.account;
     try {
@@ -159,6 +160,16 @@ class UserAuth {
     try {
       final preferences = await account.getPrefs();
       return preferences.data;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future getUserID() async {
+    final account = await instance.account;
+    try {
+      final preferences = await account.get();
+      return preferences.$id;
     } catch (_) {
       return null;
     }

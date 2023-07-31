@@ -8,6 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:tulibot/models/models.dart';
 import 'package:tulibot/screens/widgets/webview.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tulibot/services/appwrite_service.dart';
 
 import './ChatPage.dart';
 import './DiscoveryPage.dart';
@@ -52,6 +53,7 @@ class _HomeScreen extends State<HomeScreen> {
   String _wifiPassword = "...";
   String _webURL = "";
   String _roomName = "...";
+  String _speechCode = "...";
   String _languageCode = "...";
   String _speakerAName = "...";
   String _speakerBName = "...";
@@ -226,7 +228,7 @@ class _HomeScreen extends State<HomeScreen> {
             //     ],
             //   ),
             // ),
-            Divider(),
+            // Divider(),
             // ListTile(title: const Text('Devices discovery and connection')),
             // SwitchListTile(
             //   title: const Text('Auto-try specific pin when pairing'),
@@ -251,26 +253,26 @@ class _HomeScreen extends State<HomeScreen> {
             //     }
             //   },
             // ),
-            ListTile(
-              title: ElevatedButton(
-                  child: const Text('Explore discovered devices'),
-                  onPressed: () async {
-                    final BluetoothDevice? selectedDevice =
-                        await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DiscoveryPage();
-                        },
-                      ),
-                    );
-
-                    if (selectedDevice != null) {
-                      print('Discovery -> selected ' + selectedDevice.address);
-                    } else {
-                      print('Discovery -> no device selected');
-                    }
-                  }),
-            ),
+            // ListTile(
+            //   title: ElevatedButton(
+            //       child: const Text('Explore discovered devices'),
+            //       onPressed: () async {
+            //         final BluetoothDevice? selectedDevice =
+            //             await Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (context) {
+            //               return DiscoveryPage();
+            //             },
+            //           ),
+            //         );
+            //
+            //         if (selectedDevice != null) {
+            //           print('Discovery -> selected ' + selectedDevice.address);
+            //         } else {
+            //           print('Discovery -> no device selected');
+            //         }
+            //       }),
+            // ),
             ListTile(
               title: ElevatedButton(
                   child: const Text('Connect to Mike'),
@@ -538,12 +540,12 @@ class _HomeScreen extends State<HomeScreen> {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      labelText: 'Room Name',
+                      labelText: 'Speech',
                     ),
                     onChanged: (String? value) {
                       if (value != null && value.isNotEmpty) {
                         setState(() {
-                          _roomName = value;
+                          _speechCode = value;
                         });
                         // debugPrint('Room value: "$value"');
                       }
@@ -658,7 +660,7 @@ class _HomeScreen extends State<HomeScreen> {
                     if (isConnected) {
                       final Map<String, dynamic> data = <String, dynamic>{
                         'command': ['mike_chatConfig_change'],
-                        'room': _roomName,
+                        'userId': await UserAuth.instance.getUserID(),
                         'username': [
                           _speakerAName,
                           _speakerBName,
@@ -666,6 +668,7 @@ class _HomeScreen extends State<HomeScreen> {
                           _speakerDName
                         ],
                         'langCode': _languageCode,
+                        'speechCode': _speechCode
                       };
                       //convert JSON to string
                       final String text = json.encode(data);
@@ -706,6 +709,7 @@ class _HomeScreen extends State<HomeScreen> {
                       if (isConnected) {
                         final Map<String, dynamic> data = <String, dynamic>{
                           'command': ['mike_driver_start'],
+                          'userId': await UserAuth.instance.getUserID()
                         };
                         //convert JSON to string
                         final String text = json.encode(data);
