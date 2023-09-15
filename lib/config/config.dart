@@ -2,7 +2,7 @@ library config;
 
 import 'package:flutter/material.dart';
 import 'package:tulibot/screens/initial/initial_screen.dart';
-import 'package:tulibot/screens/home/home_screen.dart';
+// import 'package:tulibot/screens/home/home_screen.dart';
 // import 'package:tulibot/screens/mine/account_info/account_info.dart';
 // import 'package:tulibot/screens/mine/account_security/account_security_screen.dart';
 // import 'package:tulibot/screens/mine/font_size/font_size_screen.dart';
@@ -17,6 +17,11 @@ import 'package:tulibot/screens/home/home_screen.dart';
 // import 'package:tulibot/screens/record/record_screen.dart';
 // import 'package:tulibot/screens/sign/sign_screen.dart';
 // import 'package:tulibot/screens/widgets/custom_bottom_navigation_bar.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_final.dart';
+import 'package:tulibot/services/bluetooth_manager.dart';
 
 part 'routes.dart';
 part 'string.dart';

@@ -9,7 +9,7 @@ import 'package:tulibot/provider/provider.dart';
 import 'package:tulibot/screens/sign/widgets/login.dart';
 import 'package:tulibot/screens/sign/widgets/signup.dart';
 import 'package:tulibot/screens/sign/widgets/title_button.dart';
-import 'package:tulibot/screens/home/home_screen.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
 import 'package:tulibot/services/appwrite_service.dart';
 
 import 'widgets/forgot_password.dart';
@@ -40,7 +40,7 @@ class _SignScreenState extends State<SignScreen> {
         if (uri.path == pathVerify) {
           UserAuth.instance.confirmVerification(userId, secret);
           Navigator.of(context).pushNamedAndRemoveUntil(
-              HomeScreen.routeName, ModalRoute.withName('/'));
+              BluetoothCheckPage.routeName, ModalRoute.withName('/'));
         } else if (uri.path == pathReset) {
           context.read<ResetPasswordService>().setToken(userId, secret);
           showModalBottomSheet(
@@ -62,7 +62,7 @@ class _SignScreenState extends State<SignScreen> {
         if (uri.path == pathVerify) {
           UserAuth.instance.confirmVerification(userId, secret);
           Navigator.of(context).pushNamedAndRemoveUntil(
-              HomeScreen.routeName, ModalRoute.withName('/'));
+              BluetoothCheckPage.routeName, ModalRoute.withName('/'));
         } else if (uri.path == pathReset) {
           context.read<ResetPasswordService>().setToken(userId, secret);
           showModalBottomSheet(

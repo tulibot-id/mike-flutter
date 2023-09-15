@@ -517,6 +517,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  request_permission:
+    dependency: "direct main"
+    description:
+      name: request_permission
+      sha256: f058e75a3ff29a6f5d5ed1042673d7d4d7e5abcda12256675cf88d095dfa84f6
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
   scoped_model:
     dependency: "direct main"
     description:

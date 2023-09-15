@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:tulibot/provider/provider.dart';
-import 'package:tulibot/screens/home/home_screen.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
 import 'package:tulibot/screens/sign/widgets/template.dart';
 import 'package:tulibot/screens/widgets/alert_no_internet.dart';
 // import 'package:tulibot/screens/widgets/custom_bottom_navigation_bar.dart';
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           final isSuccess = await UserAuth.instance.loginWithGoogle();
           if (isSuccess) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                HomeScreen.routeName, ModalRoute.withName('/'));
+                BluetoothCheckPage.routeName, ModalRoute.withName('/'));
           }
         },
         // onPressedMicrosoft: () async {
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
           final isVerifid = await context.read<UserService>().getSession();
           if (isCorrect && isVerifid!) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                HomeScreen.routeName, ModalRoute.withName('/'));
+                BluetoothCheckPage.routeName, ModalRoute.withName('/'));
           } else if (isCorrect && !isVerifid!) {
             await UserAuth.instance.logout();
             Fluttertoast.showToast(

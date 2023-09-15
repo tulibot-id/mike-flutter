@@ -4,11 +4,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:tulibot/config/config.dart';
 import 'package:tulibot/provider/provider.dart';
-// import 'package:tulibot/screens/onboarding/onboarding.dart';
-import 'package:tulibot/screens/home/home_screen.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
 import 'package:tulibot/screens/sign/sign_screen.dart';
 import 'package:tulibot/services/appwrite_service.dart';
 import 'package:in_app_update/in_app_update.dart';
+import 'package:tulibot/services/bluetooth_manager.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({Key? key}) : super(key: key);
@@ -59,7 +59,7 @@ class _InitialScreenState extends State<InitialScreen> {
         final secret = uri.queryParameters['secret'].toString();
         UserAuth.instance.confirmVerification(userId, secret);
         Navigator.of(context).pushNamedAndRemoveUntil(
-            HomeScreen.routeName, ModalRoute.withName('/'));
+            BluetoothCheckPage.routeName, ModalRoute.withName('/'));
       }
     }
   }
@@ -83,7 +83,7 @@ class _InitialScreenState extends State<InitialScreen> {
               return Text('🥺 ${snapshot.error}');
             } else if (snapshot.hasData) {
               if (snapshot.data == true) {
-                return const HomeScreen();
+                return BluetoothCheckPage(bluetoothManager: blue_m);
               } else {
                 UserAuth.instance.logout();
                 return const SignScreen();
