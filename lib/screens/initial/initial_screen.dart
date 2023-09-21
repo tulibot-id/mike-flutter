@@ -9,6 +9,7 @@ import 'package:tulibot/screens/sign/sign_screen.dart';
 import 'package:tulibot/services/appwrite_service.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';
+import 'package:request_permission/request_permission.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({Key? key}) : super(key: key);
@@ -44,6 +45,20 @@ class _InitialScreenState extends State<InitialScreen> {
   void initState() {
     super.initState();
     // updateApp();
+
+    RequestPermission requestPermission = RequestPermission.instace;
+    requestPermission.requestMultipleAndroidPermissions({
+      "android.permission.BLUETOOTH",
+      "android.permission.BLUETOOTH_ADMIN",
+      "android.permission.BLUETOOTH_SCAN",
+      "android.permission.BLUETOOTH_ADVERTISE",
+      "android.permission.BLUETOOTH_CONNECT",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.INTERNET",
+      "android.permission.RECORD_AUDIO",
+      "android.permission.MODIFY_AUDIO_SETTINGS",
+      "android.permission.AUDIO_CAPTURE"
+    }, 101);
 
     hasSession = context.read<UserService>().getSession();
     initDeepLinks();

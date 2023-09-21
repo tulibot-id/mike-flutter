@@ -7,11 +7,15 @@ import 'package:tulibot/screens/bluetooth_configure/bluetooth_final.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';
 import 'package:request_permission/request_permission.dart';
 import 'package:tulibot/services/appwrite_service.dart';
+import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
+import 'package:tulibot/screens/widgets/webview.dart';
 
 class BluetoothCheckPage extends StatefulWidget {
   final BluetoothManager bluetoothManager;
   static final String routeName = "/check";
+
   BluetoothCheckPage({required this.bluetoothManager});
+
   @override
   _BluetoothCheckPageState createState() => _BluetoothCheckPageState();
 }
@@ -22,15 +26,6 @@ class _BluetoothCheckPageState extends State<BluetoothCheckPage> {
   @override
   void initState() {
     super.initState();
-    RequestPermission requestPermission = RequestPermission.instace;
-    requestPermission.requestMultipleAndroidPermissions({
-      "android.permission.BLUETOOTH",
-      "android.permission.BLUETOOTH_ADMIN",
-      "android.permission.BLUETOOTH_SCAN",
-      "android.permission.BLUETOOTH_ADVERTISE",
-      "android.permission.BLUETOOTH_CONNECT",
-      "android.permission.ACCESS_FINE_LOCATION"
-    }, 101);
     _checkBluetoothState();
   }
 
@@ -42,12 +37,7 @@ class _BluetoothCheckPageState extends State<BluetoothCheckPage> {
   }
 
   Future<void> _enableBluetooth() async {
-    await FlutterBluetoothSerial.instance.requestEnable();
     _checkBluetoothState();
-  }
-
-  void _navigateToDiscovery() {
-    Navigator.pushNamed(context, BluetoothDeviceDiscoveryPage.routeName);
   }
 
   @override
@@ -74,15 +64,56 @@ class _BluetoothCheckPageState extends State<BluetoothCheckPage> {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: _navigateToDiscovery,
+                    onPressed: () {
+                      Navigator.pushNamed(context, BluetoothDeviceDiscoveryPage.routeName);
+                    },
                     child: Text('Try to discover Mike!'),
                   )
                 ],
               ),
+            ListTile(
+              title: ElevatedButton(
+                  child: const Text('Open Webview'),
+                  onPressed: () async {
+                    //check if webURL is not empty
+                    //open webview
+                    await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          Future<dynamic> userId =  UserAuth.instance.getUserID();
+                          print(userId);
+
+                          return WebViewContainer("https://tulibot.com/chat/$userId?lang=default&speech=id-ID");
+                        },
+                      ),
+                    );
+                  }),
+            ),
             SizedBox(height: 20),
             if (_bluetoothState == BluetoothState.STATE_OFF)
               ElevatedButton(
-                onPressed: _enableBluetooth,
+                onPressed: () async {
+                  String dialogTitle = "Hey! Please give me permission to use Bluetooth!";
+                  bool displayDialogContent = true;
+                  String dialogContent = "This app requires Bluetooth to connect to device.";
+                  //or
+                  // bool displayDialogContent = false;
+                  // String dialogContent = "";
+                  String cancelBtnText = "Nope";
+                  String acceptBtnText = "Sure";
+                  double dialogRadius = 10.0;
+                  bool barrierDismissible = true; //
+
+                  BluetoothEnable.customBluetoothRequest(
+                          context, dialogTitle, displayDialogContent, dialogContent, cancelBtnText, acceptBtnText, dialogRadius, barrierDismissible)
+                      .then((result) {
+                    if (result == "true") {
+                      setState(() {
+                        _bluetoothState = BluetoothState.STATE_ON;
+                      });
+                    }
+                  });
+                },
                 child: Text('Enable Bluetooth'),
               ),
           ],

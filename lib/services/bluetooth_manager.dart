@@ -88,6 +88,10 @@ class BluetoothManager {
     return FlutterBluetoothSerial.instance.state;
   }
 
+  Future<void> requestEnableBluetooth() async{
+    await FlutterBluetoothSerial.instance.requestEnable();
+  }
+
   Future<bool?> connectToDevice(BluetoothDevice device) async {
     print("BluetoothManager:Calling connectToDevice");
     if (connection != null && connection!.isConnected) {

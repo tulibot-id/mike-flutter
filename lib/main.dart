@@ -8,6 +8,7 @@ import 'package:tulibot/screens/initial/initial_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'config/config.dart';
 import 'provider/provider.dart';
+import 'package:request_permission/request_permission.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
