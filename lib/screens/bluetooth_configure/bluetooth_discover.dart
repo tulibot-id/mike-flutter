@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'dart:typed_data';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
-import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_prechat.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';

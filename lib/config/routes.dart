@@ -5,7 +5,6 @@ final Map<String, WidgetBuilder> routes = {
   // HomeScreen.routeName: (context) => const HomeScreen(),
   BluetoothCheckPage.routeName: (context) => BluetoothCheckPage(bluetoothManager: blue_m),
   BluetoothDeviceDiscoveryPage.routeName: (context) => BluetoothDeviceDiscoveryPage(bluetoothManager: blue_m),
-  BluetoothConnectedPage.routeName: (context) => BluetoothConnectedPage(bluetoothManager: blue_m),
   BluetoothPrechat.routeName: (context) => BluetoothPrechat(bluetoothManager: blue_m),
   BluetoothConfigureMike.routeName: (context) => BluetoothConfigureMike(bluetoothManager: blue_m),
   Tulibot_ChatRoom.routeName: (context) => Tulibot_ChatRoom(bluetoothManager: blue_m)

@@ -46,10 +46,10 @@ class BluetoothManager {
     }
   }
 
-  void sendJSON(Map<String, dynamic> input) async {
+  void sendJSON(Map<String, dynamic> input) {
     final String data = json.encode(input);
-    connection!.output.add(Uint8List.fromList(utf8.encode(data + "\r\n")));
-    await connection!.output.allSent;
+    connection!.output.add(Uint8List.fromList(utf8.encode(data)));
+    connection!.output.allSent;
   }
 
   void startDiscovery({

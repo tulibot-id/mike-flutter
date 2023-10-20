@@ -134,6 +134,19 @@ class _Tulibot_ChatRoomState extends State<Tulibot_ChatRoom> {
 
   final TextEditingController _messageTextController = TextEditingController();
 
+  void _onDataReceived(Map<String, dynamic> received) {
+    bool Function(dynamic, String) stringContains = (element, searchString) {
+      if (element is String) {
+        return element.contains(searchString);
+      }
+      return false;
+    };
+
+    List<dynamic> dataList = received['dataLists'];
+
+    // int connectivity_status_idx = dataList.indexWhere((element) => stringContains(element, "connectivity_status"));
+  }
+
   void fetchUserDatas() async {
     userId = await UserAuth.instance.getUserID();
     userName = await UserAuth.instance.getUserName();
@@ -189,8 +202,8 @@ class _Tulibot_ChatRoomState extends State<Tulibot_ChatRoom> {
           if (firstAdded) {
             _addedUserName += " ";
           }
-        }else{
-          continue;
+        } else {
+          break;
         }
       }
       roomMember.add(_addedUserName);
@@ -598,9 +611,11 @@ class _Tulibot_ChatRoomState extends State<Tulibot_ChatRoom> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(100.0))),
               backgroundColor: Colors.cyan,
               onPressed: () {
-                if(captionStatus){
-
-                }
+                final Map<String, dynamic> data = <String, dynamic>{
+                  'command': [captionStatus ? 'mike_caption_stop' : 'mike_caption_start'],
+                };
+                widget.bluetoothManager.sendJSON(data);
+                widget.bluetoothManager.onDataReceivedExternalCallback = _onDataReceived;
                 setState(() {
                   captionStatus = !captionStatus;
                 });

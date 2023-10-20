@@ -18,7 +18,6 @@ import 'package:tulibot/screens/initial/initial_screen.dart';
 // import 'package:tulibot/screens/sign/sign_screen.dart';
 // import 'package:tulibot/screens/widgets/custom_bottom_navigation_bar.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
-import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_mike_configure.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_prechat.dart';

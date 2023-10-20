@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
-import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_prechat.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';
+import 'package:tulibot/services/appwrite_service.dart';
 import 'package:tulibot/screens/widgets/wifi_list_tile_state.dart';
 
 class BluetoothConfigureMike extends StatefulWidget {
@@ -20,12 +20,9 @@ class BluetoothConfigureMike extends StatefulWidget {
 class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
   bool get isConnected => (widget.bluetoothManager.connection!.isConnected ?? false);
 
-  String _address = "...";
-  String _name = "...";
-  String _wifiSSID = "...";
-  String _wifiPassword = "...";
-  String _webURL = "";
-  String _roomName = "...";
+  TextEditingController _langCodeController = TextEditingController();
+  TextEditingController _speechCodeController = TextEditingController();
+  List<TextEditingController> _speakerNameController = [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()];
   String _speechCode = "...";
   String _languageCode = "...";
   String _speakerAName = "...";
@@ -47,6 +44,15 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
     widget.bluetoothManager.onDataReceivedExternalCallback = _onDataReceived;
   }
 
+
+  void requestConfiguration(){
+    final Map<String, dynamic> data = <String, dynamic>{
+      'command': ['mike_chatConfig_get'],
+    };
+    widget.bluetoothManager.sendJSON(data);
+    widget.bluetoothManager.onDataReceivedExternalCallback = _onDataReceived;
+  }
+
   void _onDataReceived(Map<String, dynamic> received) {
     bool Function(dynamic, String) stringContains = (element, searchString) {
       if (element is String) {
@@ -60,12 +66,28 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
 
     int wifi_ap_index = dataList.indexWhere((element) => stringContains(element, "wifi_ap"));
     int connectivity_status_index = dataList.indexWhere((element) => stringContains(element, "connectivity_status"));
+    int chatconfigget_index = dataList.indexWhere((element) => stringContains(element, "mike_chatConfig_get"));
     int scsno4 = status.indexWhere((element) => stringContains(element, "Scsno 5"));
     int errno4 = status.indexWhere((element) => stringContains(element, "Errno 4"));
     int errno5 = status.indexWhere((element) => stringContains(element, "Errno 5"));
     int errno6 = status.indexWhere((element) => stringContains(element, "Errno 6"));
     int scsno6 = status.indexWhere((element) => stringContains(element, "Scsno 6"));
     int errno7 = status.indexWhere((element) => stringContains(element, "Errno 7"));
+
+    if(chatconfigget_index != -1){
+      setState(() {
+        _speakerAName = received["dataContent"][0]["username"][0];
+        _speakerBName = received["dataContent"][0]["username"][1];
+        _speakerCName = received["dataContent"][0]["username"][2];
+        _languageCode = received["dataContent"][0]["langCode"];
+        _speechCode = received["dataContent"][0]["speech"];
+        _langCodeController.text = _languageCode;
+        _speechCodeController.text = _speechCode;
+        _speakerNameController[0].text = _speakerAName;
+        _speakerNameController[1].text = _speakerBName;
+        _speakerNameController[2].text = _speakerCName;
+      });
+    }
 
     if (scsno4 != -1) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -155,8 +177,10 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
   }
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
+    requestConfiguration();
+    requestScanWifi();
   }
 
   @override
@@ -183,6 +207,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                       SizedBox(
                         width: 150,
                         child: TextFormField(
+                          controller: _speechCodeController,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Speech',
@@ -200,6 +225,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                       SizedBox(
                         width: 150,
                         child: TextFormField(
+                          controller: _langCodeController,
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Language Code',
@@ -222,6 +248,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                       SizedBox(
                         width: 150,
                         child: TextFormField(
+                          controller: _speakerNameController[0],
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Speaker 1 Name',
@@ -238,6 +265,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                       SizedBox(
                         width: 150,
                         child: TextFormField(
+                          controller: _speakerNameController[1],
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Speaker 2 Name',
@@ -259,6 +287,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                       SizedBox(
                         width: 150,
                         child: TextFormField(
+                          controller: _speakerNameController[2],
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Speaker 3 Name',
@@ -275,6 +304,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                       SizedBox(
                         width: 150,
                         child: TextFormField(
+                          controller: _speakerNameController[3],
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Speaker 4 Name',
@@ -304,7 +334,7 @@ class _BluetoothConfigureMikeState extends State<BluetoothConfigureMike> {
                           if (isConnected) {
                             final Map<String, dynamic> data = <String, dynamic>{
                               'command': ['mike_chatConfig_change'],
-                              'userId': '64c10d5fe0215059ddd9',
+                              'userId': await UserAuth.instance.getUserID(),
                               'username': [_speakerAName, _speakerBName, _speakerCName, _speakerDName],
                               'langCode': _languageCode,
                               'speechCode': _speechCode
