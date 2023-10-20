@@ -3,12 +3,14 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
-import 'package:tulibot/screens/bluetooth_configure/bluetooth_final.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_prechat.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';
 import 'package:request_permission/request_permission.dart';
 import 'package:tulibot/services/appwrite_service.dart';
 import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:tulibot/screens/widgets/webview.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'dart:convert';
 
 class BluetoothCheckPage extends StatefulWidget {
   final BluetoothManager bluetoothManager;
@@ -22,7 +24,10 @@ class BluetoothCheckPage extends StatefulWidget {
 
 class _BluetoothCheckPageState extends State<BluetoothCheckPage> {
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-
+  IO.Socket socket = IO.io('https://tulibot.com/api/socket',<String, dynamic>{
+    'autoConnect': false,
+    'transports': ['websocket'],
+  });
   @override
   void initState() {
     super.initState();
@@ -71,24 +76,6 @@ class _BluetoothCheckPageState extends State<BluetoothCheckPage> {
                   )
                 ],
               ),
-            ListTile(
-              title: ElevatedButton(
-                  child: const Text('Open Webview'),
-                  onPressed: () async {
-                    //check if webURL is not empty
-                    //open webview
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          Future<dynamic> userId =  UserAuth.instance.getUserID();
-                          print(userId);
-
-                          return WebViewContainer("https://tulibot.com/chat/$userId?lang=default&speech=id-ID");
-                        },
-                      ),
-                    );
-                  }),
-            ),
             SizedBox(height: 20),
             if (_bluetoothState == BluetoothState.STATE_OFF)
               ElevatedButton(

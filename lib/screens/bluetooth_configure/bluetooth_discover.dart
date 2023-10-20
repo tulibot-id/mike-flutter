@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
-import 'package:tulibot/screens/bluetooth_configure/bluetooth_final.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_prechat.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';
 
 class BluetoothDeviceDiscoveryPage extends StatefulWidget {
@@ -69,8 +69,7 @@ class _BluetoothDeviceDiscoveryPageState extends State<BluetoothDeviceDiscoveryP
       }
       if (pairAndConnected == true) {
         // Navigate to another page after successful connection
-        Navigator.pushNamed(context, BluetoothConnectedPage.routeName);
-        print('Navigating to /connected');
+        Navigator.pushNamed(context, BluetoothPrechat.routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

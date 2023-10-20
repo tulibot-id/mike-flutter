@@ -56,6 +56,9 @@ dependencies:
   request_permission: ^2.1.4
 
   bluetooth_enable_fork: ^0.1.6
+  socket_io_client: ^2.0.3+1
+  flutter_chat_bubble: ^2.0.2
+  flutter_initicon: ^2.0.0
 
 dev_dependencies:
   flutter_test:

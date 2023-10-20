@@ -175,6 +175,27 @@ class UserAuth {
     }
   }
 
+  Future getUserName() async {
+    final account = await instance.account;
+    try {
+      final preferences = await account.get();
+      return preferences.name;
+    } catch (_) {
+      return null;
+    }
+  }
+
+
+  Future getUserEmail() async {
+    final account = await instance.account;
+    try {
+      final preferences = await account.get();
+      return preferences.email;
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future updatePreferences(Map<String, dynamic> json) async {
     final account = await instance.account;
     try {

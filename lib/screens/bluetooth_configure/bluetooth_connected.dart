@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_check.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_connected.dart';
 import 'package:tulibot/screens/bluetooth_configure/bluetooth_discover.dart';
-import 'package:tulibot/screens/bluetooth_configure/bluetooth_final.dart';
+import 'package:tulibot/screens/bluetooth_configure/bluetooth_prechat.dart';
 import 'package:tulibot/services/bluetooth_manager.dart';
 import 'package:tulibot/screens/widgets/wifi_list_tile_state.dart';
 
@@ -25,6 +25,7 @@ class _BluetoothConnectedPageState extends State<BluetoothConnectedPage> {
   String _wifiSSID = "";
   String _wifiPassword = "";
   String _previousRouteName = "";
+  String _connectedSSID = "";
   List<dynamic> _wifiLists = [];
 
   bool get isConnected => (widget.bluetoothManager.connection?.isConnected ?? false);
@@ -105,6 +106,7 @@ class _BluetoothConnectedPageState extends State<BluetoothConnectedPage> {
     List<dynamic> status = received['status'];
 
     int wifi_ap_index = dataList.indexWhere((element) => stringContains(element, "wifi_ap"));
+    int connectivity_status_index = dataList.indexWhere((element) => stringContains(element, "connectivity_status"));
     int scsno4 = status.indexWhere((element) => stringContains(element, "Scsno 5"));
     int errno4 = status.indexWhere((element) => stringContains(element, "Errno 4"));
     int errno5 = status.indexWhere((element) => stringContains(element, "Errno 5"));
@@ -119,7 +121,7 @@ class _BluetoothConnectedPageState extends State<BluetoothConnectedPage> {
           duration: const Duration(seconds: 3),
         ),
       );
-      Navigator.pushNamed(context, BluetoothTulibotApp.routeName);
+      Navigator.pushNamed(context, BluetoothPrechat.routeName);
     }
 
     if (errno4 != -1 || errno5 != -1 || errno6 != -1) {
@@ -173,6 +175,12 @@ class _BluetoothConnectedPageState extends State<BluetoothConnectedPage> {
       requestScanWifi();
     }
 
+    if(connectivity_status_index != -1){
+      if(received["dataContent"][0] == "full"){
+
+      }
+    }
+
     if (wifi_ap_index != -1) {
       if (received['status'][wifi_ap_index].contains('Scsno')) {
         setState(() {
@@ -181,37 +189,8 @@ class _BluetoothConnectedPageState extends State<BluetoothConnectedPage> {
           _wifiLists = received['dataContent'][wifi_ap_index];
           for (int i = 0; i < _wifiLists.length; i++) {
             if (_wifiLists[i]['in_use'] == true) {
-              isAlreadyConnected = true; // seems like we already connected to a wifi already....
-              String _connectedSSID = _wifiLists[i]["ssid"];
-              print("PREEEEE $_previousRouteName");
-              // if (_previousRouteName != BluetoothTulibotApp.routeName) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Mike Already Connected'),
-                      content: Text(
-                          'Mike is already connected to $_connectedSSID Wi-Fi network. \nPress "Cancel" to close this dialog and connect to another Wi-Fi access point, or "Continue" to next page.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
-                          },
-                          child: Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
-                            Navigator.pushNamed(parentContext, BluetoothTulibotApp.routeName);
-                          },
-                          child: Text('Continue'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              // }
-              // Always display connected wifi on the top
+              isAlreadyConnected = true;
+              _connectedSSID = _wifiLists[i]["ssid"];
               if (i != 0) {
                 var temp = _wifiLists[i];
                 _wifiLists[i] = _wifiLists[0];
@@ -223,4 +202,5 @@ class _BluetoothConnectedPageState extends State<BluetoothConnectedPage> {
       }
     }
   }
+
 }
